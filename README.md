@@ -10,6 +10,12 @@ Generate a transaction batch in `src/output.json`:
 npm run generate
 ```
 
+## Lint
+
+```bash
+npm run lint
+```
+
 ## Add more functions that can be used by the batcher
 
 1. Add ABI of the contract in `src/abi`
