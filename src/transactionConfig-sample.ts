@@ -12,7 +12,7 @@ const transactionConfig: TransactionConfig = {
       params: {
         spender: '0x914f986a44AcB623A277d6Bd17368171FCbe4273',
         amount: parseUnits('1'),
-      }
+      },
     },
   ],
 }

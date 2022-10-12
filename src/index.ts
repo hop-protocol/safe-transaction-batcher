@@ -1,8 +1,12 @@
 import fs from 'fs'
 import transactionConfig from './transactionConfig'
-import { Transaction } from './interfaces'
 import { getContractMethod } from './utils'
 import { defaultOutputMeta, outputDir } from './constants'
+import {
+  Transaction,
+  TransactionBuilderTransaction,
+  TransactionBuilderData,
+} from './interfaces'
 
 // TODO: Add a contract name to TransactionConfig in order to avoid issues when multiple contracts have the same function name
 
@@ -32,7 +36,7 @@ async function main() {
     chainId: '1',
     createdAt: Date.now(),
     meta: defaultOutputMeta,
-    transactions
+    transactions,
   }
 
   // Produce output
@@ -40,7 +44,11 @@ async function main() {
   if (fs.existsSync(distributionLocation)) {
     fs.unlinkSync(distributionLocation)
   }
-  fs.writeFileSync(distributionLocation, JSON.stringify(output, null, 2), 'utf-8')
+  fs.writeFileSync(
+    distributionLocation,
+    JSON.stringify(output, null, 2),
+    'utf-8'
+  )
 }
 
 main()

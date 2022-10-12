@@ -1,13 +1,12 @@
 import { BigNumber } from 'ethers'
 import { FunctionNames } from './constants'
 
-
-export interface ApproveParams {
+interface ApproveParams {
   spender: string
   amount: BigNumber
 }
 
-export interface SendToL2Params {
+interface SendToL2Params {
   chainId: number
   recipient: string
   amount: BigNumber
@@ -40,7 +39,6 @@ export interface TransactionBuilderTransaction {
   data: string | null
   contractMethod: string
   contractInputsValues: any
-
 }
 
 export interface TransactionBuilderMeta {

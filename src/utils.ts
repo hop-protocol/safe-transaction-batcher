@@ -10,9 +10,10 @@ export async function getContractMethod(functionName: string) {
   for (const file of files) {
     const contractFile = fs.readFileSync(file, 'utf-8')
     const contractJson = JSON.parse(contractFile)
-    for (const contract of contractJson)
-    if (contract.name === functionName) {
-      return contract
+    for (const contract of contractJson) {
+      if (contract.name === functionName) {
+        return contract
+      }
     }
   }
 
