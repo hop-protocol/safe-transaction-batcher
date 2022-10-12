@@ -10,3 +10,5 @@ coverage.json
 typechain
 cache
 artifacts
+output.json
+transactionConfig.ts
