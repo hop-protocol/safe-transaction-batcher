@@ -1,13 +1,10 @@
 import { BigNumber } from 'ethers'
+import { FunctionNames } from './constants'
 
-export enum FunctionNames {
-  Approve = 'approve',
-  SendToL2 = 'sendToL2'
-}
 
 export interface ApproveParams {
   spender: string
-  value: BigNumber
+  amount: BigNumber
 }
 
 export interface SendToL2Params {
@@ -20,7 +17,8 @@ export interface SendToL2Params {
   relayerFee: BigNumber
 }
 
-type FunctionName = FunctionNames.Approve | FunctionNames.SendToL2
+// https://www.typescriptlang.org/docs/handbook/enums.html#enums-at-compile-time
+type FunctionName = keyof typeof FunctionNames
 type TransactionParams = ApproveParams | SendToL2Params
 
 export interface Transaction {
@@ -32,4 +30,32 @@ export interface Transaction {
 
 export interface TransactionConfig {
   transactions: Transaction[]
+}
+
+// Transaction Builder App interfaces
+
+export interface TransactionBuilderTransaction {
+  to: string
+  value: string
+  data: string | null
+  contractMethod: string
+  contractInputsValues: any
+
+}
+
+export interface TransactionBuilderMeta {
+  name: string
+  description: string
+  txBuilderVersion: string
+  createdFromSafeAddress: string
+  createdFromOwnerAddress: string
+  checksum: string
+}
+
+export interface TransactionBuilderData {
+  version: string
+  chainId: string
+  createdAt: number
+  meta: TransactionBuilderMeta
+  transactions: TransactionBuilderTransaction[]
 }

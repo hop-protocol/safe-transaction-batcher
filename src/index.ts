@@ -1,24 +1,33 @@
 import fs from 'fs'
 import transactionConfig from './transactionConfig'
-import { Transaction, TransactionConfig, FunctionNames } from './interfaces'
+import { Transaction } from './interfaces'
 import { getContractMethod } from './utils'
 import { defaultOutputMeta, outputDir } from './constants'
+
+// TODO: Add a contract name to TransactionConfig in order to avoid issues when multiple contracts have the same function name
+
 async function main() {
   // Generate data
-  let transactions: any[] = []
-  for (const tx of transactionConfig.transactions) {
+  const transactions: TransactionBuilderTransaction[] = []
+  const configTransactions: Transaction[] = transactionConfig.transactions
+  for (const tx of configTransactions) {
     const contractMethod = await getContractMethod(tx.functionName)
+    const contractInputsValues: any = {}
+    for (const [key, value] of Object.entries(tx.params)) {
+      // App requires every value to be a string
+      contractInputsValues[key] = value.toString()
+    }
     transactions.push({
       to: tx.target,
-      value: tx.value,
+      value: tx.value.toString(),
       data: null,
       contractMethod,
-      contractInputValues: tx.params
+      contractInputsValues,
     })
   }
 
   // Add metadata
-  const output = {
+  const output: TransactionBuilderData = {
     version: '1.0',
     chainId: '1',
     createdAt: Date.now(),
