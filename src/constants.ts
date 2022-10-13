@@ -6,6 +6,7 @@ export const outputDir = path.resolve(__dirname, '')
 
 export enum FunctionNames {
   approve = 'approve',
+  transfer = 'transfer',
   sendToL2 = 'sendToL2',
 }
 

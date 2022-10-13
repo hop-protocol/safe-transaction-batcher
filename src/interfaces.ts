@@ -6,6 +6,11 @@ interface ApproveParams {
   amount: BigNumber
 }
 
+interface TransferParams {
+  recipient: string
+  amount: BigNumber
+}
+
 interface SendToL2Params {
   chainId: number
   recipient: string
@@ -18,7 +23,7 @@ interface SendToL2Params {
 
 // https://www.typescriptlang.org/docs/handbook/enums.html#enums-at-compile-time
 type FunctionName = keyof typeof FunctionNames
-type TransactionParams = ApproveParams | SendToL2Params
+type TransactionParams = ApproveParams | SendToL2Params | TransferParams
 
 export interface Transaction {
   target: string
